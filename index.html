@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -22,59 +22,6 @@ function generatePayPalLink() {
   <input type="number" id="units" name="units" min="1" required><br><br>
   <input type="submit" value="Generate PayPal Link">
 </form>
-
-</body>
-</html>
--->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PayPal Payment</title>
-<script src="https://www.paypal.com/sdk/js?client-id=AfICCO1MmB3T0050sLd7qsIfZeuwhXnyiDgjb3A3hH2JDZNL56WKhsQkzscEXFeMQJQynNtwpwy-9xcx&currency=GBP"></script>
-<script>
-function renderPayPalButton(amount) {
-  paypal.Buttons({
-    createOrder: function(data, actions) {
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: amount
-          }
-        }]
-      });
-    },
-    onApprove: function(data, actions) {
-      return actions.order.capture().then(function(details) {
-        alert('Transaction completed by ' + details.payer.name.given_name + '!');
-      });
-    }
-  }).render('#paypal-button-container');
-}
-
-window.onload = function () {
-  document.getElementById('units-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var numberOfUnits = document.getElementById('units').value;
-    var amount = (numberOfUnits * 7).toFixed(2); // Calculate amount and format to 2 decimal places
-    renderPayPalButton(amount); // Render the PayPal button with the dynamic amount
-  });
-};
-</script>
-</head>
-<body>
-
-<h2>Blizzard Brawl 2023 super ticket machine</h2>
-
-<form id="units-form" action="javascript:void(0);">
-  <label for="units">Enter the number of units:</label><br>
-  <input type="number" id="units" name="units" min="1" required><br><br>
-  <input type="submit" value="Calculate Payment">
-</form>
-
-<div id="paypal-button-container"></div>
 
 </body>
 </html>
